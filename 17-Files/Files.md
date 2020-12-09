@@ -1,7 +1,7 @@
-## 17- فایل ها Files
+# 17- فایل ها Files
 
 
-#کلاس فایل File Class
+## کلاس فایل File Class
 
 
 برای انجام عملیات با **فایل ها** اعم از بازکردن, بستن , خواندن و نوشتن , از **کلاس File** و **متدهای آماده** درون آن استفاده می شود. از متدهای رایج کاربردی در این کلاس می توان به isfile , isDirectory ,open ,close, exists , length , lastmodify , get name , getpath, getparent و غیره اشاره کرد.
