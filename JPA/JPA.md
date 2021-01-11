@@ -1,4 +1,4 @@
-﻿## JPA 
+## JPA 
 یک ساختار انتزاعی است که برای تبدیل کلاس های برنامه به جداول پایگاه داده و بالعکس استفاده میشود و آنرا با وندور های دیتابیس مثل hibernate پیاده سازی میکنیم
 
 ## انواع نگاشت:
@@ -229,3 +229,54 @@ public class Course {
     private List<Student> studentList;
 }
 ```
+
+## self-reference
+برای اینکه یک entity را با خودش ارتباط دهیم باید در همان کلاس یک شی و یک لیست یا یک شی از خودش بسته به نوع رابطه میتواند متفاوت باشد به صورت مثال زیر میسازیم
+
+```
+import javax.persistence.*;
+import javax.persistence.GeneratedValue;
+import java.util.List;
+
+@Entity
+public class Student {
+
+    public Student(){}
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String name;
+    
+    @ManyToOne
+    private Student intoducer;
+    
+    @OneToMany(mappedBy = "introducer" ,cascade = CascadeType.PERSIST)
+    private List<Student> studentList;
+}
+```
+
+نکته کاربردی: میتوان یک Collection با فقط یک شی در آن را ساخت و به شکل زیر در پروژه های خود از آن استفاده کرد
+
+```
+	Student.setStudentList(Collections.singleton(student));
+```
+
+## متد های  EntityManager
+
+
+- getTransaction().commit():از این متد برای ذخیره اطلاعات و عملیات های انجام شده در دیتابیس استفاده میشود.
+- flush(): از این متد برای ذخیره اطلاعات در دیتابیس استفاده میشود .
+- persist(): از این متد برای ساختن کد دیتابیس عملیات مورد نظر استفاده میشود.
+- merge(): اگر شی ورودی به این متد در جدول مورد نظر وجود داشت آنرا بروزرسانی میکند و اگر وجود نداشت آنرا به جدول اضافه میکند.
+- find(): از این متد برای پیدا کردن یک field در یک جدول بخصوص در دیتابیس استفاده میشود که از متد پایین جدید تر است.
+- reference(): از این متد برای پیدا کردن یک field در یک جدول بخصوص در jpa context استفاده میشود که از متد بالا سریعتر است.
+- remove(): از این متد برای حذف از دیتابیس استفاده میشود.
+- createQuery(): از این متد برای نوشتن دستورات jpql به صورت مستقیم استفاده میشود.
+- createNamedQuery(): از این متد برای استفاده از یک namedQuery استفاده میشود.
+- createNativeQuery(): از این متد برای نوشتن کد sql مربوط به دیتابیس مورد استفاده استفاده میشود که به صورت مستقیم در دیتابیس اجرا خواهد شد.
+
+**Query و TypedQuery:**
+از Query ها برای ذخیره کردن کوئری های JPQL , SQL استفاده میشود.
+دقیقا همان Query است با این تفاوت که نوع کلاسی که برگزدانده میشود را از قبل میدانیم.
+مثلا اگر بدانیم نوع کلاسی که از دیتابیس برگردانده میشود چیست میتوانیم از TypedQuery<Student> استفاده کنیم.
