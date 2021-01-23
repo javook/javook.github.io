@@ -7,10 +7,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 @Repository
-public class TestRepository {
+public class ClassRepository {
 
     @PersistenceContext
     EntityManager entityManager;
@@ -37,4 +40,35 @@ public class TestRepository {
         return  newDao;
    }
 
+   public List<MyDAO> findAll(){
+       TypedQuery<User> query = entityManager.createQuery("select u from User u", User.class);
+       List<User> userList= query.getResultList();
+       List<MyDAO> daoList = new ArrayList<>();
+       for (User user: userList) {
+            daoList.add(UsertoDAO(user));
+       }
+       return daoList;
+   }
+
+   @Transactional
+   public void update(Integer id, String firstName, String lastName){
+        User user = new User();
+        user = entityManager.find(User.class, id);
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        System.out.println("\n\n\n"+firstName+"\n\n"+lastName+"\n\n");
+        System.out.println("\n\n\n"+user.getFirstName()+"\n\n"+user.getLastName()+"\n\n");
+        entityManager.persist(user);
+   }
+
+   @Transactional
+   public void delete(Integer id){
+        User user = new User();
+        user = entityManager.find(User.class, id);
+        entityManager.remove(user);
+   }
+
+    public MyDAO UsertoDAO(User user){
+        return new MyDAO(user.getFirstName(),user.getLastName());
+    }
 }
