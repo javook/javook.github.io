@@ -1,7 +1,8 @@
-﻿## Spring
+## Spring
 **تعریف :** 
 از این فریمورک برای توسعه وب اپلیکیشن هایی که میخواهیم سریعا به مرحله استقرار و استفاده برسند استفاده میکنیم.
 برای استفاده از Spring Boot از Annotation ها استفاده میشود به طور مثال برای اجرای برنامه باید یک فایل در ریشه برنامه یک فایل جاوا ساخته و میتوان از @SpringBootApplication یا @ComponentScan یا @EnableAutoConfiguration استفاده کرد که معمولا از @SpringBootApplication استفاده میکنیم
+
 **@SpringBootApplication vs @ComponentScan vs @EnableAutoConfiguration :**
 از @ComponentScan برای پیدا اسکن کردن پروژه Spring و پیدا کردن کامپوننت های برنامه استفاده میشود و از @SpringBootApplication به منظور پیکربندی و تنظیم کردن Bean های موجود در classpath پروژه استفاده میشود در حالی که میتوان کاری که دو کلید واژه قبلی انجام میدهند را با @SpringBootApplication انجام داد.
 
@@ -58,7 +59,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 </project>
 ```
 
-پس از اضافه کردن Spring Boot به پروژه با ساختن یک فایل جاوا در ریشه برنامه (بطور مثال spring boot/src/main/java/com/example/SpringBootApplication.java(
+پس از اضافه کردن Spring Boot به پروژه با ساختن یک فایل جاوا در ریشه برنامه بطور مثال spring boot/src/main/java/com/(example/SpringBootApplication.java)
 که به صورت زیر یک متد main داشته و برنامه ما در آن اجرا میشود میتوان پروژه را اجرا کرد.
 نکته : با اجرا برنامه در این مرحله به ارور برخورد میکنیم چون در فایل controller هیچ مسیری برای پردازش توسط برنامه مشخص نکرده ایم.
 ```
