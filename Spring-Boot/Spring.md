@@ -1,15 +1,21 @@
-﻿## Spring
+## Spring
 **تعریف :** 
-از این فریمورک برای توسعه وب اپلیکیشن هایی که میخواهیم سریعا به مرحله استقرار و استفاده برسند استفاده میکنیم.
-برای استفاده از Spring Boot از Annotation ها استفاده میشود به طور مثال برای اجرای برنامه باید یک فایل در ریشه برنامه ساخته و توسط کلید واژه های  @SpringBootApplication یا@ComponentScan یا @EnableAutoConfiguration  برنامه را اجرا میکنیم.
-**@SpringBootApplication vs @ComponentScan vs @EnableAutoConfiguration :**
-از @ComponentScan برای اسکن کردن پروژه Spring و پیدا کردن کامپوننت های برنامه استفاده میشود و از @EnableAutoConfiguration به منظور پیکربندی و تنظیم کردن Bean های موجود در classpath پروژه استفاده میشود در حالی که میتوان کاری که دو کلید واژه قبلی انجام میدهند را با @SpringBootApplication انجام داد.
-نکته : برای اجرای یک برنامه Spring معمولا از @SpringBootApplication استفاده میکنیم.
-نکته : در Spring Boot از Dependency Injection استفاده میشود که در ادامه توضیح داده میشود.
+در جاوا از این فریمورک برای توسعه راحتتر برنامه ها استفاده میشود که این فریمورک شامل چند ماژول بوده که در ادامه به توضیح آنها خواهیم پرداخت.
+
 **Spring MVC :**
 از این فریمورک برای پیاده سازی معماری MVC(model, view, controller) استفاده میکنیم و برعکس Spring Boot باید تنظیمات بیشتری انجام شود تا اپلیکیشن به مرحله توسعه برسد.
 
-**اجرای یک برنامه Spring Boot ;**
+**Spring Boot :**
+از این فریمورک برای توسعه وب اپلیکیشن هایی که میخواهیم سریعا به مرحله استقرار و استفاده برسند استفاده میکنیم.
+برای استفاده از Spring Boot از Annotation ها استفاده میشود به طور مثال برای اجرای برنامه میتوان یک فایل در ریشه برنامه ساخته و توسط کلید واژه های  @SpringBootApplication و یا @ComponentScan و @EnableAutoConfiguration و @Configuration   برنامه را اجرا میکنیم.
+**@SpringBootApplication vs @ComponentScan & @EnableAutoConfiguration & @Configuration :**
+از @ComponentScan برای اسکن کردن پروژه Spring و پیدا کردن کامپوننت های برنامه استفاده میشود و از @EnableAutoConfiguration به منظور پیکربندی و تنظیم کردن Bean های موجود در classpath پروژه استفاده میشود و از  @Configuration برای مشخص کردن کلاس هایی که به منظور پیکربندی پروژه ساخته میشوند استفاده میشود در حالی که میتوان کاری که سه کلید واژه قبلی انجام میدهند را با @SpringBootApplication انجام داد.
+نکته : برای اجرای یک برنامه Spring معمولا از @SpringBootApplication استفاده میکنیم.
+نکته : در Spring Boot از Dependency Injection استفاده میشود که در ادامه توضیح داده میشود.
+
+
+
+
 برای اجرا باید  Spring Boot را به فایل pom.xml برنامه اضافه کرد 
 در مرحله بعد باید یک کلاس جاوا در root پروژه ساخت و در آن اپلیکشن را به صورت زیر اجرا کرد.
 ‍
@@ -58,7 +64,9 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 	</dependencies>
 </project>
 ```
-
+**<parent>:**
+در فایل pom.xml برای هیچ کدام از dependency ها version مشخص نکردیم چون ممکن است ورژن مشخص شده توسط ما با نسخه Spring Boot مورد استفاده همخوانی نداشته باشد. برای راحتی کار از تگ parent استفاده کردیم خود maven وظیفه هماهنگی نسخه ها را بر عهده داشته و بر اساس نسخه مشخص شده در تگ parent نسخه dependency ها را مدیریت کرده و دیگر نیازی به تنظیمات از طرف برنامه نویس نخواهد بود.
+نکته : 
 پس از اضافه کردن Spring Boot به پروژه با ساختن یک فایل جاوا در ریشه برنامه (بطور مثال spring boot/src/main/java/com/example/SpringBootApplication.java(
 که به صورت زیر یک متد main داشته و برنامه ما در آن اجرا میشود میتوان پروژه را اجرا کرد.
 نکته : با اجرا برنامه در این مرحله به ارور برخورد میکنیم چون در فایل controller هیچ مسیری برای پردازش توسط برنامه مشخص نکرده ایم.
@@ -114,15 +122,20 @@ Controller ها وظیفه دریافت درخواست ها از سمت کارب
 
  2. @RestController : این کلید واژه میگوید Controller مورد نظر فایل JSON بر میگرداند.
 
- 3. @RequestMapping : برای مشخص کردن اینکه URL مخصوص به این کنترلر استفاده میشود
+ 3. @RequestMapping : برای مشخص کردن اینکه کدام URL مختص این کنترلر است استفاده میشود
 نکته : برای اختصاص یک URL به کنترلر مربوطه میتوان از این کلیدواژه در ابتدای کنترلر استفاده کرد.
-4. @GetMapping : به منظور بررسی درخواست های get استفاده شده و.
+نکته : میتوان نوع درخواستی که باید توسط متد مورد نظر پاسخ داده میشود را به صورت زیر مشخص کرد
+```
+	@RequestMapping(method = RequestMethod.POST , value = "/anything")
+	public save(MyDTO dto){...}
+```
+4. @GetMapping : همان @RequestMapping است با این تفاوت که method آن به صورت GET مقداردهی شده است
 
-5. @PostMapping : به منظور بررسی درخواست های post استفاده شده و.
+5. @PostMapping : همان @RequestMapping است با این تفاوت که method آن به صورت POST مقداردهی شده است
 
-6. @PutMapping : به منظور بررسی درخواست های put استفاده شده و.
+6. @PutMapping : همان @RequestMapping است با این تفاوت که method آن به صورت PUT مقداردهی شده است
 
-7. @DeleteMapping : به منظور بررسی درخواست های post استفاده شده و.
+7. @DeleteMapping : همان @RequestMapping است با این تفاوت که method آن به صورت DELETE مقداردهی شده است
 
 8.  @RequestParam : قبل از هر متغیری بیاید یعنی این متغیر از سمت request دریافت شود.
 مثال : localhost:8080/test?id=1
@@ -173,13 +186,13 @@ public class InterfaceController {
 		interfaceUserService.deleteUser(id);  
 	}  
   
-	@RequestMapping(method = RequestMethod.PUT, value = "/update/{id}/{firstName}/{lastName}")  
+	@RequestMapping(method = RequestMethod.PUT, value = "/update/{id}")  
 	public void updateUser(@PathVariable Integer id,MyDTO dto){  
 		interfaceUserService.updateUser(id, dto);  
 	}   
 }
 ```
-
+نکته : هنگام استفاده از Mapping ها استفاده از value و path با هم تفاوتی ندارند و میتوان از هر دو استفاده کرد.
 **2.Service**
 این کلاس وظیفه پردازش داده ها را داشته و در کل اصلی ترین اتفاقات در اپلیکشن در این کلاس رخ میدهد.نقطه مشترک بین Controller(UI) و Repository(DB) بوده و DAO را به DTO تبدیل کرده و بالعکس
 
@@ -191,9 +204,7 @@ import com.example.repository.ClassRepository;
 import org.springframework.stereotype.Service;  
   
 import java.util.List;  
-import java.util.stream.Collectors;  
-  
-;  
+import java.util.stream.Collectors;   
   
 @Service  
 public class ClassUserService {  
@@ -254,15 +265,15 @@ public class ClassUserService {
 
  3. @Transactional : این کلیدوازه باید قبل از متد هایی بیاید که برروی دیتابیس تغییراتی ایجاد میکند.
 
-نکته : معمولاRepository ها را به صورت یک Interface تعریف میکنیم که از کلاس CrudRepository ارث بری میکند. در صورت ارث بری از این کلاس دیگر لازم نیست کلاس Repository را تعریف کنیم و تمامی متد های لازم برای کار با دیتابیس را خواهیم داشت.
+نکته : معمولاRepository ها را به صورت یک Interface تعریف میکنیم که از کلاس CrudRepository یا JpaRepository ارث بری میکند. در صورت ارث بری از این کلاس دیگر لازم نیست @Repository استفاده کنیم و علاوه بر آن دیگر نیاز نیست کلاس Repository  را تعریف کنیم و تمامی متد های لازم برای کار با دیتابیس را خواهیم داشت.
+
 ```
 package com.example.repository;  
   
 import com.example.model.User;  
 import org.springframework.data.repository.CrudRepository;  
 import org.springframework.stereotype.Repository;  
-  
-@Repository  
+    
 public interface InterfaceRepository extends CrudRepository<User, Integer>{  
   
     List<User> findAllByFirstName(String firstName);  
