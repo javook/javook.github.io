@@ -68,7 +68,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 در فایل pom.xml برای هیچ کدام از dependency ها version مشخص نکردیم چون ممکن است ورژن مشخص شده توسط ما با نسخه Spring Boot مورد استفاده همخوانی نداشته باشد. برای راحتی کار از تگ parent استفاده کردیم خود maven وظیفه هماهنگی نسخه ها را بر عهده داشته و بر اساس نسخه مشخص شده در تگ parent نسخه dependency ها را مدیریت کرده و دیگر نیازی به تنظیمات از طرف برنامه نویس نخواهد بود.
 
 نکته : 
-پس از اضافه کردن Spring Boot به پروژه با ساختن یک فایل جاوا در ریشه برنامه بطور مثال )spring boot/src/main/java/com/example/SpringBootApplication.java(
+پس از اضافه کردن Spring Boot به پروژه با ساختن یک فایل جاوا در ریشه برنامه بطور مثال (spring boot/src/main/java/com/example/SpringBootApplication.java)
 
 که به صورت زیر یک متد main داشته و برنامه ما در آن اجرا میشود میتوان پروژه را اجرا کرد.
 نکته : با اجرا برنامه در این مرحله به ارور برخورد میکنیم چون در فایل controller هیچ مسیری برای پردازش توسط برنامه مشخص نکرده ایم.
