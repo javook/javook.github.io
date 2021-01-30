@@ -8,8 +8,10 @@
 **Spring Boot :**
 از این فریمورک برای توسعه وب اپلیکیشن هایی که میخواهیم سریعا به مرحله استقرار و استفاده برسند استفاده میکنیم.
 برای استفاده از Spring Boot از Annotation ها استفاده میشود به طور مثال برای اجرای برنامه میتوان یک فایل در ریشه برنامه ساخته و توسط کلید واژه های  @SpringBootApplication و یا @ComponentScan و @EnableAutoConfiguration و @Configuration   برنامه را اجرا میکنیم.
+
 **@SpringBootApplication vs @ComponentScan & @EnableAutoConfiguration & @Configuration :**
 از @ComponentScan برای اسکن کردن پروژه Spring و پیدا کردن کامپوننت های برنامه استفاده میشود و از @EnableAutoConfiguration به منظور پیکربندی و تنظیم کردن Bean های موجود در classpath پروژه استفاده میشود و از  @Configuration برای مشخص کردن کلاس هایی که به منظور پیکربندی پروژه ساخته میشوند استفاده میشود در حالی که میتوان کاری که سه کلید واژه قبلی انجام میدهند را با @SpringBootApplication انجام داد.
+
 نکته : برای اجرای یک برنامه Spring معمولا از @SpringBootApplication استفاده میکنیم.
 نکته : در Spring Boot از Dependency Injection استفاده میشود که در ادامه توضیح داده میشود.
 
