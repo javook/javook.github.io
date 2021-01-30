@@ -291,4 +291,13 @@ public interface InterfaceRepository extends CrudRepository<User, Integer>{
 تعریف کرد که متد مورد نظر چه نوع رفتاری را از خود نشان دهد
 
 
+**Data Access Object:**
+از این کلاس برای جدا کردن لایه Business از DataBase استفاده میشود. کار کردن با DAO ها باعث میشود بتوانیم هر دو این لایه ها را به صورت جداگانه توسعه دهیم بدون اینکه با هم ارتباطی داشته باشند.
 
+**Data Transfer Object :**
+DTO ها صرفا کلاس هایی هستند که وظیفه جابه‌جا کردن اطلاعات بین لایه های مختلف برنامه را برعهده دارند.
+در این مثال از DTO ها برای انتقال اطلاعات بین لایه  Business و Controller استفاده کردیم.
+
+برای مشاهده پروژه میتوانید از لینک زیر استفاده کنید
+
+https://git.javahosting.ir/mmahdikarimian/java-learning/-/tree/master/Spring%20Boot
